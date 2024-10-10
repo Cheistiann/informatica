@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <style>
+        .box {
+            height: 200px;
+            width: 200px;
+            border: 1px solid black;
+            background-color: rgb(237, 237, 237);
+            margin-bottom: 10px;
+        }
+    </style>
+</head>
+<body>
+    <h1>
+        La mia prima pagina JavaScript con 4 box e 4 bottoni
+    </h1>
+
+    <!-- Box divs -->
+    <div class="box" id="out1"></div>
+    <div class="box" id="out2"></div>
+    <div class="box" id="out3"></div>
+    <div class="box" id="out4"></div>
+
+    <!-- Buttons -->
+    <button onclick="document.getElementById('out1').innerHTML = 'Messaggio per il primo box.'">Scrivi in Box 1</button>
+    <button onclick="document.getElementById('out2').innerHTML = 'Messaggio per il secondo box.'">Scrivi in Box 2</button>
+    <button onclick="document.getElementById('out3').innerHTML = 'Messaggio per il terzo box.'">Scrivi in Box 3</button>
+    <button onclick="document.getElementById('out4').innerHTML = 'Messaggio per il quarto box.'">Scrivi in Box 4</button>
+
+</body>
+</html>
