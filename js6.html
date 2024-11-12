@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <title>Contatore Decrementale Semplice</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin-top: 50px;
+        }
+        #counter {
+            font-size: 40px;
+            margin-bottom: 20px;
+        }
+        button {
+            font-size: 18px;
+            padding: 10px 20px;
+        }
+        #results {
+            margin-top: 20px;
+            font-size: 18px;
+        }
+    </style>
+</head>
+<body>
+
+    <div id="counter">100.00</div>
+    <button onclick="recordTime()">Premi qui!</button>
+    <div id="results"></div>
+    
+    <script>
+        let counter = 100.00;
+        let interval;
+        let totalDifference = 0;
+
+        function startCounter() {
+            interval = setInterval(function() {
+                counter -= 0.01;
+                document.getElementById("counter").innerText = counter.toFixed(2);
+
+                if (counter <= 0) {
+                    clearInterval(interval);
+                    showTotal();
+                }
+            }, 10);
+        }
+
+        function recordTime() {
+  
+            let optimalTime = Math.floor(counter / 10) * 10;
+
+            if (optimalTime % 10 === 0 && optimalTime >= 10 && optimalTime <= 90) {
+                let difference = optimalTime - counter;
+                totalDifference += difference;
+
+                document.getElementById("results").innerHTML += 
+                    "Tempo ottimale: " + optimalTime + " - Tuo tempo: " + counter.toFixed(2) + " - Differenza: " + difference.toFixed(2) + "<br>";
+            }
+        }
+        function showTotal() {
+            document.getElementById("results").innerHTML += 
+                "<br><strong>Somma delle differenze: " + totalDifference.toFixed(2) + "</strong>";
+        }
+
+        window.onload = startCounter;
+    </script>
+
+</body>
+</html>
