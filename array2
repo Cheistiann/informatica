@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Accesso Array</title>
+</head>
+<body>
+    <h1>Accesso agli elementi di un array</h1>
+    <p>Array: ["primo", "secondo", "terzo"]</p>
+
+    <input type="number" id="indexInput" placeholder="Inserisci un indice">
+    <button onclick="accessElement()">Cerca</button>
+
+    <p id="result"></p>
+
+    <script>
+        const array = ["primo", "secondo", "terzo"];
+
+        function accessElement() {
+            const index = parseInt(document.getElementById("indexInput").value, 10);
+            const result = (index < 0 || index >= array.length)
+                ? "Indice non valido"
+                : array[index];
+            document.getElementById("result").textContent = result;
+        }
+    </script>
+</body>
+</html>
