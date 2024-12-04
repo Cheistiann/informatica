@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Array Morra</title>
+</head>
+<body>
+    <h1>Stampa di 10 elementi casuali</h1>
+    <p id="out1"></p>
+
+    <script>
+        const arrymorra = ["sasso", "mano", "forbice"];
+
+        for (let i = 0; i < 10; i++) {
+            const tiro = Math.floor(Math.random() * arrymorra.length);
+            document.getElementById("out1").innerHTML += arrymorra[tiro] + " ";
+        }
+    </script>
+</body>
+</html>
