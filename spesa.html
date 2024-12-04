@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lista della Spesa Casuale</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+        ul {
+            list-style-type: none;
+            padding: 0;
+        }
+        li {
+            padding: 5px;
+            margin: 5px 0;
+            background-color: #f4f4f4;
+            border-radius: 4px;
+        }
+        button {
+            padding: 10px 15px;
+            margin: 5px;
+            font-size: 16px;
+            cursor: pointer;
+            border: none;
+            background-color: #4CAF50;
+            color: white;
+            border-radius: 4px;
+        }
+        button:hover {
+            background-color: #45a049;
+        }
+        .random-btn {
+            background-color: #FF9800;
+        }
+        .random-btn:hover {
+            background-color: #fb8c00;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Lista della Spesa</h1>
+    <ul id="listaSpesa"></ul>
+
+    <div>
+        <button onclick="aggiungiArticolo()">Aggiungi Articolo</button>
+        <button class="random-btn" onclick="acquistoCasuale()">Acquista Casualmente</button>
+    </div>
+
+    <script>
+        // Array per memorizzare gli articoli
+        let listaDellaSpesa = [];
+
+        // Funzione per aggiungere un articolo alla lista
+        function aggiungiArticolo() {
+            let articolo = prompt("Inserisci un articolo per la lista della spesa:");
+            if (articolo) {
+                // Aggiungiamo l'articolo con push()
+                listaDellaSpesa.push(articolo);
+                aggiornaLista();
+            } else {
+                alert("Non hai inserito nulla.");
+            }
+        }
+
+        // Funzione per rimuovere un articolo casuale dalla lista
+        function acquistoCasuale() {
+            if (listaDellaSpesa.length > 0) {
+                // Selezioniamo un indice casuale
+                let indiceCasuale = Math.floor(Math.random() * listaDellaSpesa.length);
+                let articoloCasuale = listaDellaSpesa[indiceCasuale];
+                
+                // Rimuoviamo l'articolo selezionato
+                listaDellaSpesa.splice(indiceCasuale, 1);
+                alert("Hai acquistato: " + articoloCasuale);
+                aggiornaLista();
+            } else {
+                alert("La lista è vuota!");
+            }
+        }
+
+        // Funzione per aggiornare la lista visibile
+        function aggiornaLista() {
+            let listaUl = document.getElementById("listaSpesa");
+            listaUl.innerHTML = ""; // Svuotiamo la lista
+
+            listaDellaSpesa.forEach(function(articolo) {
+                let li = document.createElement("li");
+                li.textContent = articolo;
+                listaUl.appendChild(li);
+            });
+        }
+    </script>
+
+</body>
+</html>
