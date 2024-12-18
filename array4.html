@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Analisi Numerica con Array</title>
+</head>
+<body>
+
+    <h1>Analisi Numerica con Array</h1>
+    <p><strong>Numeri primi:</strong></p>
+    <p id="out1"></p>
+
+    <p><strong>Numeri non primi con i loro fattori:</strong></p>
+    <p id="out2"></p>
+
+    <script>
+        // Funzione per determinare se un numero è primo
+        function isPrime(n) {
+            if (n <= 1) return false; // Numeri <= 1 non sono primi
+            for (let i = 2; i <= Math.sqrt(n); i++) {
+                if (n % i === 0) {
+                    return false; // Se è divisibile per un altro numero, non è primo
+                }
+            }
+            return true; // È primo se non è stato trovato alcun divisore
+        }
+
+        // Funzione per ottenere i fattori di un numero
+        function getFactors(n) {
+            let factors = [];
+            for (let i = 1; i <= n; i++) {
+                if (n % i === 0) {
+                    factors.push(i); // Aggiungi i fattori
+                }
+            }
+            return factors;
+        }
+
+        // Stampa i numeri primi da 0 a 1000
+        let primes = [];
+        let nonPrimesWithFactors = [];
+
+        for (let i = 0; i <= 1000; i++) {
+            if (isPrime(i)) {
+                primes.push(i);
+            } else {
+                let factors = getFactors(i);
+                nonPrimesWithFactors.push(`${i}: ${factors.join(", ")}`);
+            }
+        }
+
+        // Visualizza i risultati nella pagina HTML
+        document.getElementById("out1").innerHTML = primes.join(", ");
+        document.getElementById("out2").innerHTML = nonPrimesWithFactors.join("<br>");
+    </script>
+
+</body>
+</html>
