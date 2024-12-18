@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Analisi Numerica con Array</title>
+</head>
+<body>
+
+    <h1>Analisi Numerica con Array</h1>
+    <p><strong>Lista di numeri casuali generati:</strong></p>
+    <p id="out1"></p>
+
+    <script>
+        // Creiamo un array per i numeri casuali
+        let numeri = [];
+
+        // Funzione per inserire 1000 numeri casuali nell'array
+        function inserisciNumeriCasuali() {
+            for (let i = 0; i < 1000; i++) {
+                let numeroCasuale = Math.floor(Math.random() * 1000); // Numero casuale tra 0 e 999
+                numeri.push(numeroCasuale); // Aggiungiamo il numero all'array
+            }
+        }
+
+        // Chiamata alla funzione per generare i numeri casuali
+        inserisciNumeriCasuali();
+
+        // Visualizzare l'array di numeri casuali nel documento HTML
+        document.getElementById("out1").innerHTML = numeri.join(", ");
+    </script>
+
+</body>
+</html>
