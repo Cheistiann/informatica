@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Form Post</title>
+  <script>
+    function inviaPost(event) {
+      event.preventDefault(); // Evita il submit del form
+
+      // Ottieni i valori dal form
+      const nickname = document.getElementById("nickname").value;
+      const messaggio = document.getElementById("messaggio").value;
+      const visibilita = document.querySelector('input[name="visibilita"]:checked').value;
+
+      // Stampa i dati in una zona della pagina
+      document.getElementById("output").innerHTML = 
+        `<strong>Nickname:</strong> ${nickname}<br>
+         <strong>Messaggio:</strong> ${messaggio}<br>
+         <strong>Visibilità:</strong> ${visibilita}`;
+    }
+  </script>
+</head>
+<body>
+  <h2>Invia un Post</h2>
+  <form onsubmit="inviaPost(event)">
+    <div>
+      <label for="nickname">Nickname:</label>
+      <input type="text" id="nickname" required>
+    </div>
+    <div>
+      <label for="messaggio">Messaggio:</label>
+      <textarea id="messaggio" required></textarea>
+    </div>
+    <div>
+      <label>Visibilità:</label><br>
+      <input type="radio" id="pubblico" name="visibilita" value="Pubblico" checked> Pubblico<br>
+      <input type="radio" id="privato" name="visibilita" value="Privato"> Privato
+    </div>
+    <button type="submit">Invia</button>
+  </form>
+
+  <div id="output"></div>
+
+  <p><strong>Nota:</strong> Il metodo <strong>GET</strong> invia i dati nell'URL e può essere visibile, mentre il metodo <strong>POST</strong> invia i dati nel corpo della richiesta e non sono visibili nell'URL.</p>
+</body>
+</html>
