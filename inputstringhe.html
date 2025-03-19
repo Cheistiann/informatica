@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Form e Funzioni JavaScript</title>
 <script>
-// Funzione 1: Calcola la lunghezza della stringa
+// Parte 1 Calcola la lunghezza della stringa
 function calcolaLunghezza() {
 const inputA = document.getElementById('inputA').value;
 const inputB = document.getElementById('inputB').value;
@@ -14,7 +14,7 @@ document.getElementById('lunghezzaA').innerText = `Lunghezza Stringa A: ${inputA
 document.getElementById('lunghezzaB').innerText = `Lunghezza Stringa B: ${inputB.length}`;
 }
 
-// Funzione 2: Restituisce la stringa al contrario
+// Parte 2 Restituisce la stringa al contrario
 function stringaContraria() {
 const inputA = document.getElementById('inputA').value;
 const inputB = document.getElementById('inputB').value;
@@ -23,7 +23,7 @@ document.getElementById('contrariaA').innerText = `Stringa A al contrario: ${inp
 document.getElementById('contrariaB').innerText = `Stringa B al contrario: ${inputB.split('').reverse().join('')}`;
 }
 
-// Funzione 3: Unisce le due stringhe
+// Parte 3 Unisce le due stringhe
 function unisciStringhe() {
 const inputA = document.getElementById('inputA').value;
 const inputB = document.getElementById('inputB').value;
@@ -31,7 +31,7 @@ const inputB = document.getElementById('inputB').value;
 document.getElementById('unione').innerText = `Stringa unita: ${inputA + inputB}`;
 }
 
-// Funzione 4: Somma delle lunghezze e verifica se la stringa B è troppo lunga
+// Parte 4 Somma delle lunghezze e verifica se la stringa B è troppo lunga
 function sommaLunghezze() {
 const inputA = document.getElementById('inputA').value;
 const inputB = document.getElementById('inputB').value;
