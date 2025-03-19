@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Elaborazione Stringhe</title>
+</head>
+<body>
+
+    <h1>Elaborazione Stringhe</h1>
+
+    <label>Stringa A:</label>
+    <input type="text" id="a"><br><br>
+
+    <label>Stringa B:</label>
+    <input type="text" id="b"><br><br>
+
+    <button onclick="calcola()">Calcola</button>
+
+    <p id="risultato"></p>
+
+    <script>
+        function calcola() {
+            var a = document.getElementById("a").value;
+            var b = document.getElementById("b").value;
+
+            var lunghezzaA = a.length;
+            var lunghezzaB = b.length;
+            var invertitaA = "";
+            var invertitaB = "";
+            var sommaLunghezze = lunghezzaA + lunghezzaB;
+            var unite = a + b;
+            var avviso = "";
+
+            // Invertire le stringhe con un ciclo for
+            for (var i = a.length - 1; i >= 0; i--) {
+                invertitaA += a[i];
+            }
+            for (var i = b.length - 1; i >= 0; i--) {
+                invertitaB += b[i];
+            }
+
+            // Controllo sulla lunghezza di B
+            if (lunghezzaB > 20) {
+                avviso = "B è troppo lunga!";
+            }
+
+            // Mostra il risultato
+            document.getElementById("risultato").innerHTML =
+                "Lunghezza A: " + lunghezzaA + "<br>" +
+                "Lunghezza B: " + lunghezzaB + "<br>" +
+                "A al contrario: " + invertitaA + "<br>" +
+                "B al contrario: " + invertitaB + "<br>" +
+                "Stringhe unite: " + unite + "<br>" +
+                "Somma lunghezze: " + sommaLunghezze + "<br>" +
+                "<b style='color:red;'>" + avviso + "</b>";
+        }
+    </script>
+
+</body>
+</html>
