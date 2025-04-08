@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Generatore di Numeri Casuali</title>
+    <style>
+        body { font-family: Arial, sans-serif; text-align: center; }
+        #output { margin-top: 20px; white-space: pre-wrap; }
+    </style>
+</head>
+<body>
+    <h1>Generatore di Numeri Casuali</h1>
+    <label for="min">Min:</label>
+    <input type="number" id="min" value="0" step="any">
+    <label for="max">Max:</label>
+    <input type="number" id="max" value="1" step="any">
+    <button onclick="generaNumeri()">Avvia</button>
+    <div id="output"></div>
+
+    <script>
+        let numeri = [];
+        let rapporti = [];
+        let distanze = [];
+        let intervallo;
+
+        function generaNumeri() {
+            clearInterval(intervallo);
+            const min = parseFloat(document.getElementById('min').value);
+            const max = parseFloat(document.getElementById('max').value);
+            const mediaRange = (max - min) / 2;
+
+            intervallo = setInterval(() => {
+                let numero = Math.random() * (max - min) + min;
+                numeri.push(numero);
+
+                if (numeri.length > 1) {
+                    let rapporto = numero / numeri[numeri.length - 2];
+                    rapporti.push(rapporto);
+                }
+
+                let distanza = Math.abs(numero - mediaRange);
+                distanze.push(distanza);
+
+                let output = `Numero: ${numero.toFixed(2)}\nDistanza: ${distanza.toFixed(2)}\n`;
+                if (rapporti.length > 0) {
+                    output += `Rapporto: ${rapporti[rapporti.length - 1].toFixed(2)}\n`;
+                }
+
+                if (numeri.length % 50 === 0) {
+                    let media = numeri.slice(-50).reduce((a, b) => a + b) / 50;
+                    output += `Media ultimi 50: ${media.toFixed(2)}\n`;
+                }
+
+                document.getElementById('output').textContent = output + document.getElementById('output').textContent;
+            }, 500);
+        }
+    </script>
+</body>
+</html>
