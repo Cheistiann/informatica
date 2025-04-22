@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Clip Producer</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      background-color: #f0f0f0;
+    }
+    .container {
+      background-color: white;
+      padding: 20px;
+      border-radius: 8px;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+      width: 300px;
+      text-align: center;
+    }
+    .output {
+      margin-top: 20px;
+      background-color: #f4f4f4;
+      padding: 10px;
+      border-radius: 4px;
+      height: 100px;
+      overflow-y: auto;
+    }
+    button {
+      margin: 10px;
+      padding: 10px 20px;
+      font-size: 14px;
+      cursor: pointer;
+      border: none;
+      background-color: #4CAF50;
+      color: white;
+      border-radius: 4px;
+    }
+    button:disabled {
+      background-color: #ccc;
+      cursor: not-allowed;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    <h1>Clip Producer</h1>
+    <button id="startButton">Avvia Produzione</button>
+    <button id="stopButton" disabled>Ferma Produzione</button>
+    <button id="resetButton">Resetta Conteggio</button>
+    <button id="increaseButton">Aumenta Produzione</button>
+
+    <div class="output" id="outputArea"></div>
+  </div>
+
+  <script>
+    class ClipProducer {
+      constructor(name, productionRatePerSecond) {
+        this.name = name; // Nome della fabbrica
+        this.productionRate = productionRatePerSecond; // Quante graffette produce al secondo
+        this.totalClips = 0; // Conteggio totale di graffette prodotte
+        this.running = false; // Stato della produzione
+        this._intervalId = null; // ID dell'intervallo per fermare la produzione
+      }
+
+      startProduction() {
+        if (this.running) return;
+        this.running = true;
+        this._intervalId = setInterval(() => {
+          this.totalClips += this.productionRate;
+          this.updateOutput();
+        }, 1000);
+      }
+
+      stopProduction() {
+        if (!this.running) return;
+        clearInterval(this._intervalId);
+        this._intervalId = null;
+        this.running = false;
+        this.updateOutput();
+      }
+
+      resetProduction() {
+        this.totalClips = 0;
+        this.updateOutput();
+      }
+
+      status() {
+        return {
+          name: this.name,
+          running: this.running,
+          productionRate: this.productionRate,
+          totalClips: this.totalClips
+        };
+      }
+
+      // Metodo aggiuntivo: aumenta la velocità di produzione
+      increaseProductionRate(amount) {
+        this.productionRate += amount;
+        this.updateOutput();
+      }
+
+      updateOutput() {
+        const outputArea = document.getElementById('outputArea');
+        outputArea.innerHTML = `
+          <p><strong>Fabbrica:</strong> ${this.name}</p>
+          <p><strong>Produzione al secondo:</strong> ${this.productionRate} graffette</p>
+          <p><strong>Graffette totali prodotte:</strong> ${this.totalClips}</p>
+          <p><strong>Stato:</strong> ${this.running ? 'In produzione' : 'Fermata'}</p>
+        `;
+      }
+    }
+
+    const clipFactory = new ClipProducer('Fabbrica A', 5);
+
+    const startButton = document.getElementById('startButton');
+    const stopButton = document.getElementById('stopButton');
+    const resetButton = document.getElementById('resetButton');
+    const increaseButton = document.getElementById('increaseButton');
+
+    startButton.addEventListener('click', () => {
+      clipFactory.startProduction();
+      startButton.disabled = true;
+      stopButton.disabled = false;
+    });
+
+    stopButton.addEventListener('click', () => {
+      clipFactory.stopProduction();
+      startButton.disabled = false;
+      stopButton.disabled = true;
+    });
+
+    resetButton.addEventListener('click', () => {
+      clipFactory.resetProduction();
+    });
+
+    increaseButton.addEventListener('click', () => {
+      clipFactory.increaseProductionRate(3); // Aumenta di 3 graffette al secondo
+    });
+
+    clipFactory.updateOutput(); // Inizializza l'output
+  </script>
+
+</body>
+</html>
