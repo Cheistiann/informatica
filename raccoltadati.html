@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8">
+  <title>Gioco Tempo di Reazione</title>
+  <style>
+    #cerchio {
+      width: 100px;
+      height: 100px;
+      background-color: red;
+      border-radius: 50%;
+      position: absolute;
+      display: none;
+      cursor: pointer;
+    }
+    body {
+      text-align: center;
+      font-family: sans-serif;
+      margin-top: 50px;
+    }
+  </style>
+</head>
+<body>
+  <h1>Tempo di Reazione</h1>
+  <p>Clicca il cerchio rosso il più velocemente possibile!</p>
+  <button onclick="iniziaGioco()">Inizia</button>
+  <p id="tempo"></p>
+  <div id="cerchio" onclick="cliccato()"></div>
+
+  <script>
+    let startTime;
+    let tempiReazione = [];
+
+    function mostraCerchio() {
+      const cerchio = document.getElementById("cerchio");
+      const x = Math.random() * (window.innerWidth - 100);
+      const y = Math.random() * (window.innerHeight - 100);
+      cerchio.style.left = x + "px";
+      cerchio.style.top = y + "px";
+      cerchio.style.display = "block";
+      startTime = Date.now();
+    }
+
+    function nascondiCerchio() {
+      document.getElementById("cerchio").style.display = "none";
+    }
+
+    function cliccato() {
+      const tempo = Date.now() - startTime;
+      tempiReazione.push(tempo);
+      document.getElementById("tempo").innerText = `Tempo: ${tempo} ms`;
+      nascondiCerchio();
+      setTimeout(mostraCerchio, Math.random() * 2000 + 1000); // prossimo cerchio dopo 1-3 sec
+    }
+
+    function iniziaGioco() {
+      tempiReazione = [];
+      document.getElementById("tempo").innerText = "";
+      setTimeout(mostraCerchio, Math.random() * 2000 + 1000);
+    }
+  </script>
+</body>
+</html>
