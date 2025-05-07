@@ -18,23 +18,38 @@
       font-family: sans-serif;
       margin-top: 50px;
     }
+    #listaTempi {
+      position: fixed;
+      bottom: 10px;
+      left: 10px;
+      background-color: rgba(255, 255, 255, 0.9);
+      padding: 10px;
+      border: 1px solid #ccc;
+      font-size: 14px;
+      text-align: left;
+      max-height: 200px;
+      overflow-y: auto;
+    }
   </style>
 </head>
 <body>
   <h1>Tempo di Reazione</h1>
   <p>Clicca il cerchio rosso il più velocemente possibile!</p>
   <button onclick="iniziaGioco()">Inizia</button>
+  <button onclick="mostraTempi()">Mostra Tempi</button>
+  <button onclick="scaricaTempi()">Scarica JSON</button>
   <p id="tempo"></p>
   <div id="cerchio" onclick="cliccato()"></div>
+  <div id="listaTempi"></div>
 
   <script>
-    let startTime;
-    let tempiReazione = [];
+    var startTime;
+    var tempiReazione = [];
 
     function mostraCerchio() {
-      const cerchio = document.getElementById("cerchio");
-      const x = Math.random() * (window.innerWidth - 100);
-      const y = Math.random() * (window.innerHeight - 100);
+      var cerchio = document.getElementById("cerchio");
+      var x = Math.random() * (window.innerWidth - 100);
+      var y = Math.random() * (window.innerHeight - 100);
       cerchio.style.left = x + "px";
       cerchio.style.top = y + "px";
       cerchio.style.display = "block";
@@ -46,17 +61,43 @@
     }
 
     function cliccato() {
-      const tempo = Date.now() - startTime;
+      var tempo = Date.now() - startTime;
       tempiReazione.push(tempo);
-      document.getElementById("tempo").innerText = `Tempo: ${tempo} ms`;
+      document.getElementById("tempo").innerText = "Tempo: " + tempo + " ms";
       nascondiCerchio();
-      setTimeout(mostraCerchio, Math.random() * 2000 + 1000); // prossimo cerchio dopo 1-3 sec
+      setTimeout(mostraCerchio, Math.random() * 2000 + 1000);
     }
 
     function iniziaGioco() {
       tempiReazione = [];
       document.getElementById("tempo").innerText = "";
+      document.getElementById("listaTempi").innerHTML = "";
       setTimeout(mostraCerchio, Math.random() * 2000 + 1000);
+    }
+
+    function mostraTempi() {
+      var lista = document.getElementById("listaTempi");
+      lista.innerHTML = ""; 
+      if (tempiReazione.length === 0) {
+        lista.innerText = "Nessun tempo registrato.";
+        return;
+      }
+      for (var i = 0; i < tempiReazione.length; i++) {
+        var riga = document.createElement("p");
+        riga.textContent = (i + 1) + ") " + tempiReazione[i] + " ms";
+        lista.appendChild(riga);
+      }
+    }
+
+    function scaricaTempi() {
+      var jsonData = JSON.stringify(tempiReazione, null, 2);
+      var blob = new Blob([jsonData], { type: "application/json" });
+      var link = document.createElement("a");
+      link.href = URL.createObjectURL(blob);
+      link.download = "tempi_reazione.json";
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
     }
   </script>
 </body>
