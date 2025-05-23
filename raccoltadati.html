@@ -30,6 +30,10 @@
       max-height: 200px;
       overflow-y: auto;
     }
+    #nomeUtente {
+      font-size: 18px;
+      font-weight: bold;
+    }
   </style>
 </head>
 <body>
@@ -41,10 +45,21 @@
   <p id="tempo"></p>
   <div id="cerchio" onclick="cliccato()"></div>
   <div id="listaTempi"></div>
+  <p id="nomeUtente"></p>
 
   <script>
     var startTime;
     var tempiReazione = [];
+    var nome = "";
+
+    function chiediNome() {
+      nome = prompt("Inserisci il tuo nome per iniziare il gioco:");
+      if (nome) {
+        document.getElementById("nomeUtente").innerText = "Benvenuto, " + nome + "!";
+      } else {
+        document.getElementById("nomeUtente").innerText = "Benvenuto, Giocatore!";
+      }
+    }
 
     function mostraCerchio() {
       var cerchio = document.getElementById("cerchio");
@@ -72,6 +87,7 @@
       tempiReazione = [];
       document.getElementById("tempo").innerText = "";
       document.getElementById("listaTempi").innerHTML = "";
+      chiediNome();  // Chiedi il nome prima di iniziare
       setTimeout(mostraCerchio, Math.random() * 2000 + 1000);
     }
 
